@@ -1,15 +1,15 @@
 import React from 'react';
 import './search.css'
 
-const Search = (props) => {
+const Search = ({ value, getSearch, setSearchBy, searchBy }) => {
     return (
-        <div>
-            <input value={props.value} onChange={props.getSearch} className="search" placeholder="Search..." />
-            <select className="select">
-                <option>Fullname</option>
-                <option>Email</option>
-                <option>City</option>
-                <option>State</option>
+        <div className="search-bar">
+            <input value={value} onChange={getSearch} className="search" placeholder="Search..." />
+            <select className="select" onChange={setSearchBy} value={searchBy}>
+                <option value="fullname">Fullname</option>
+                <option value="email">Email</option>
+                <option value="city">City</option>
+                <option value="state">State</option>
             </select>
         </div>
     )

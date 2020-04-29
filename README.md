@@ -59,3 +59,13 @@
     * Single User Component
     * Add Graph - Login History
     * Add new libraries (sass, bootstrap, react-router)
+
+
+### todo (Ulan)
+    * Pagination - Done
+    * Scroll Pagination 
+    * Sort - In Progress
+### homework notes(Ulan)
+    * add sort icons (depeneding on ascending or desc)
+    * make table responsive
+    * footer not on the bottom

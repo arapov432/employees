@@ -2,15 +2,17 @@ import React, {Component} from 'react';
 import List from './components/list/List';
 import Search from './components/search/Search';
 import './app.css'
+import Footer from './components/footer/Footer';
 
 class App extends Component {
     constructor(){
-        console.log('constructor')
         super();
         this.state = {
             employees : [],
             isLoading: false,
-            search:''
+            search:'',
+            searchBy: 'fullname',
+            sortBy: '',
         }
     }
 
@@ -21,33 +23,48 @@ class App extends Component {
         .then(employees=>this.setState({employees, isLoading:false}))
     }
 
-    componentDidMount(){
-        this.getApiData();
-    }
+    componentDidMount(){ this.getApiData() }
 
-    getSearch = (e) => {
-        this.setState({search:e.target.value});
-    }
+    getSearch = e => this.setState({search:e.target.value});
+
+    sortByFn = sortBy => this.setState({sortBy})
+
+    setSearchBy = e => this.setState({searchBy: e.target.value});
 
     render(){
-        const { employees, isLoading, search } = this.state;
-        
-        const filteredEmployees = employees.filter(employee => {
-            const fFirst = employee.first_name.toLowerCase().includes(search.toLowerCase());
-            const fLast = employee.last_name.toLowerCase().includes(search.toLowerCase());
-            return fFirst || fLast
+        const { employees, isLoading, search, sortBy, searchBy } = this.state;
+        // filter
+        let filteredEmployees = employees.filter(employee => {
+            if(searchBy === 'fullname'){
+                const fFirst = employee.first_name && employee.first_name.toLowerCase().includes(search.toLowerCase());
+                const fLast = employee.last_name && employee.last_name.toLowerCase().includes(search.toLowerCase());
+                return fFirst || fLast
+            } else {
+                return employee[searchBy] && employee[searchBy].toLowerCase().includes(search.toLowerCase());
+            }      
         })
-
+        // sort TODO: reverse sort
+        filteredEmployees.sort((a, b) => a[sortBy] > b[sortBy] ? 1 : -1 )
+        // loading animation
         const loader = <div className="lds-dual-ring"></div>;
-        let content = isLoading ? loader : <List employees={filteredEmployees} />
+        // check if data presents
+        let content = isLoading ? loader : <List employees={filteredEmployees} sortByFn={this.sortByFn}/>
+        // if no data found via search
         if(!isLoading && !filteredEmployees.length){
             content = <div className="not-found">Data Not Found</div>
         }
         return (
-            <div className="container">
-                <Search value={search} getSearch={this.getSearch} />
-                {content}
-            </div>
+            <>
+                <div className="container">
+                    <Search value={search} 
+                        getSearch={this.getSearch} 
+                        setSearchBy={this.setSearchBy} 
+                        searchBy={searchBy}
+                    />
+                    {content}
+                </div>
+                <Footer />
+            </>
         )
 
     }

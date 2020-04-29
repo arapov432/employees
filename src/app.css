@@ -1,7 +1,14 @@
+body {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  min-height: 100vh;
+}
 .container {
   text-align: center;
   width: 800px;
   margin: 0 auto;
+  padding-bottom: 50px;
   position: relative;
 }
 .lds-dual-ring {
