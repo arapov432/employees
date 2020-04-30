@@ -11,7 +11,7 @@ class App extends Component {
             employees : [],
             isLoading: false,
             search:'',
-            searchBy: 'fullname',
+            searchBy: '',
             sortBy: '',
         }
     }
@@ -22,7 +22,6 @@ class App extends Component {
         .then(json=>json.json())
         .then(employees=>this.setState({employees, isLoading:false}))
     }
-
     componentDidMount(){ this.getApiData() }
 
     getSearch = e => this.setState({search:e.target.value});
@@ -31,24 +30,22 @@ class App extends Component {
 
     setSearchBy = e => this.setState({searchBy: e.target.value});
 
-    render(){
-        const { employees, isLoading, search, sortBy, searchBy } = this.state;
-        // filter
-        let filteredEmployees = employees.filter(employee => {
-            if(searchBy === 'fullname'){
-                const fFirst = employee.first_name && employee.first_name.toLowerCase().includes(search.toLowerCase());
-                const fLast = employee.last_name && employee.last_name.toLowerCase().includes(search.toLowerCase());
-                return fFirst || fLast
-            } else {
-                return employee[searchBy] && employee[searchBy].toLowerCase().includes(search.toLowerCase());
-            }      
+    filter = () => {
+        const {employees, search, searchBy} = this.state;
+        return employees.filter(employee => {
+            return employee[searchBy] && searchBy.length ? employee[searchBy].toLowerCase().includes(search.toLowerCase()) : true;
         })
-        // sort TODO: reverse sort
-        filteredEmployees.sort((a, b) => a[sortBy] > b[sortBy] ? 1 : -1 )
+    }
+
+    render(){
+        const { isLoading, search, searchBy } = this.state;
+        // filter
+        const filteredEmployees = this.filter();
+
         // loading animation
         const loader = <div className="lds-dual-ring"></div>;
         // check if data presents
-        let content = isLoading ? loader : <List employees={filteredEmployees} sortByFn={this.sortByFn}/>
+        let content = isLoading ? loader : <List employees={filteredEmployees}/>
         // if no data found via search
         if(!isLoading && !filteredEmployees.length){
             content = <div className="not-found">Data Not Found</div>

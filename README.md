@@ -48,6 +48,26 @@
     * Search by user input 
 
 # Day 3 - 4/29/2020
+* What we practiced?
+    * Search Input - Controlled
+    * Select Options
+    * Terniary operators
+    * Arrow functions
+    * Css
+    * Table UI
+
+* What we learned?
+    * Map/Filter Higher order functions
+    * Modularizing
+    * && operators
+
+# Day 4 - 4/30/2020
+* What we practiced?
+    
+
+* What we learned?
+    
+
 
 
 
@@ -62,9 +82,9 @@
 
 
 ### todo (Ulan)
-    * Pagination - Done
+    * Pagination 
     * Scroll Pagination 
-    * Sort - In Progress
+    * Sort
 ### homework notes(Ulan)
     * add sort icons (depeneding on ascending or desc)
     * make table responsive
