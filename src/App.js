@@ -11,8 +11,9 @@ class App extends Component {
             employees : [],
             isLoading: false,
             search:'',
-            searchBy: 'fullname',
+            searchBy: '',
             sortBy: '',
+            toggleOrder: false
         }
     }
 
@@ -27,28 +28,49 @@ class App extends Component {
 
     getSearch = e => this.setState({search:e.target.value});
 
-    sortByFn = sortBy => this.setState({sortBy})
+    handleSortValue = sortBy => this.setState({sortBy, toggleOrder: !this.state.toggleOrder})
 
-    setSearchBy = e => this.setState({searchBy: e.target.value});
+    getSearchBy = e => this.setState({searchBy: e.target.value});
 
-    render(){
-        const { employees, isLoading, search, sortBy, searchBy } = this.state;
-        // filter
-        let filteredEmployees = employees.filter(employee => {
-            if(searchBy === 'fullname'){
-                const fFirst = employee.first_name && employee.first_name.toLowerCase().includes(search.toLowerCase());
-                const fLast = employee.last_name && employee.last_name.toLowerCase().includes(search.toLowerCase());
-                return fFirst || fLast
-            } else {
-                return employee[searchBy] && employee[searchBy].toLowerCase().includes(search.toLowerCase());
-            }      
+    filter = () => {
+        const {employees, search, searchBy } = this.state;
+        return employees.filter(employee => {
+            return employee[searchBy] && searchBy.length ? employee[searchBy].toLowerCase().includes(search.toLowerCase()): true     
         })
-        // sort TODO: reverse sort
-        filteredEmployees.sort((a, b) => a[sortBy] > b[sortBy] ? 1 : -1 )
+    }
+
+    sortList = (filteredEmployees ) => {
+        const {toggleOrder, sortBy } = this.state;
+
+        filteredEmployees.sort((a, b) => {
+            // ascending
+            if (b[sortBy] > a[sortBy] && a[sortBy] != null && b[sortBy] != null) {
+                return 1;
+            }
+            // descending. if value is null keep it last
+            else if(b[sortBy] < a[sortBy] || a[sortBy] === null) {
+                return -1;
+            } else {
+                // handle same values
+                return 0;
+            } 
+        })
+        if(toggleOrder) {
+            filteredEmployees.reverse();
+        } 
+        return filteredEmployees;
+    }
+    render(){
+        const { isLoading, search, searchBy } = this.state;
+
+        // filter
+        const filteredEmployees = this.filter();
+        // sort 
+        const sortedEmployees = this.sortList(filteredEmployees);
         // loading animation
         const loader = <div className="lds-dual-ring"></div>;
         // check if data presents
-        let content = isLoading ? loader : <List employees={filteredEmployees} sortByFn={this.sortByFn}/>
+        let content = isLoading ? loader : <List employees={sortedEmployees} handleSortValue={this.handleSortValue}/>
         // if no data found via search
         if(!isLoading && !filteredEmployees.length){
             content = <div className="not-found">Data Not Found</div>
@@ -58,7 +80,7 @@ class App extends Component {
                 <div className="container">
                     <Search value={search} 
                         getSearch={this.getSearch} 
-                        setSearchBy={this.setSearchBy} 
+                        getSearchBy={this.getSearchBy} 
                         searchBy={searchBy}
                     />
                     {content}

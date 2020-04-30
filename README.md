@@ -68,4 +68,4 @@
 ### homework notes(Ulan)
     * add sort icons (depeneding on ascending or desc)
     * make table responsive
-    * footer not on the bottom
+    * add more styling

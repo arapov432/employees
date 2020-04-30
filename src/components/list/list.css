@@ -10,14 +10,16 @@
     padding: 10px;
     box-sizing: border-box;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 .row:nth-child(even) {
     background-color: #ebebeb;
 }
 .row.header {
-    font-weight: bold;
+    font-weight: bolder;
     background-color: #d8d8d8;
     cursor: pointer;
+    text-transform: uppercase;
 }
 .row {
     border-bottom: solid 1px #d8d8d8;
