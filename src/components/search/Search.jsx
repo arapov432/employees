@@ -1,7 +1,7 @@
 import React from 'react';
 import './search.css'
 
-const Search = ({ value, getSearch, getSearchBy, searchBy }) => {
+const Search = ({ value, getSearch, setSearchBy, searchBy }) => {
     console.log(searchBy.length)
     return (
         <div className="search-bar">
