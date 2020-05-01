@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import './list.css'
 class List extends Component {
-
-        if (arrow === "right" && currentPage < rightLimit) {
-            this.setState(prevState => ({currentPage: prevState.currentPage + 1}))
-        }
-        else if (arrow === "left" && currentPage > 1) {
-        this.setState(prevState => ({currentPage: prevState.currentPage - 1}))
-        } else if(typeof arrow === 'number') {
-            this.setState({currentPage: arrow})
-        }
         
-    }
     render(){
         const { employees, sortByFn, deleteEmployee } = this.props;
         return (
