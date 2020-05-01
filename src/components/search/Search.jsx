@@ -6,7 +6,7 @@ const Search = ({ value, getSearch, getSearchBy, searchBy }) => {
     return (
         <div className="search-bar">
             <input value={value} onChange={getSearch} className="search" placeholder="Search..." />
-            <select className="select" onChange={getSearchBy} value={searchBy}>
+            <select className="select" onChange={setSearchBy} value={searchBy}>
                 { !searchBy.length && <option value="">Select</option>}
                 <option value="first_name">firstName</option>
                 <option value="last_name">lastName</option>
