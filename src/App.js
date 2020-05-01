@@ -13,6 +13,7 @@ class App extends Component {
             search:'',
             searchBy: '',
             sortBy: '',
+            toggleOrder: false
         }
     }
 
@@ -26,26 +27,69 @@ class App extends Component {
 
     getSearch = e => this.setState({search:e.target.value});
 
-    sortByFn = sortBy => this.setState({sortBy})
-
     setSearchBy = e => this.setState({searchBy: e.target.value});
 
     filter = () => {
         const {employees, search, searchBy} = this.state;
         return employees.filter(employee => {
-            return employee[searchBy] && searchBy.length ? employee[searchBy].toLowerCase().includes(search.toLowerCase()) : true;
+            if(searchBy === '') {
+                return  employee["first_name"] && employee["first_name"].toLowerCase().includes(search.toLowerCase())         
+            } else {
+                return employee[searchBy] && searchBy.length ? employee[searchBy].toLowerCase().includes(search.toLowerCase()) : true;
+            }
         })
     }
+    sortByFn = (value) => {
+       this.setState({sortBy: value, toggleOrder: !this.state.toggleOrder})
+    }
+    handleSortvalue = (filteredEmployees) => {
+        const { toggleOrder, sortBy } = this.state;
+        // 1.option (needs a little work)
+        // let sortCB =(a,b) => {
+        //     let res = 0
+            
+        //     if (a[sortBy] > b[sortBy] ) {
+        //       res = 1
+        //     } else if (a[sortBy] < b[sortBy] || b[sortBy] === null) {
+        //       res = -1
+        //     } 
 
+        //     return toggleOrder ? res : (res*(-1))
+        //   }
+
+        filteredEmployees.sort((a,b) => {
+
+            if (a[sortBy] > b[sortBy] ) {
+              return 1
+            } else if (a[sortBy] < b[sortBy] || b[sortBy] === null) {
+              return -1
+            } else {
+                return 0
+            }
+        });
+        // 2. option
+        if (toggleOrder) {
+            filteredEmployees.reverse();
+        }
+        return filteredEmployees;
+    }
+    deleteEmployee = (ID) => {
+        const { employees } = this.state;
+        const employeesExceptDeleted = employees.filter(em => em.id !== ID);
+        this.setState({employees: employeesExceptDeleted})
+    }
     render(){
-        const { isLoading, search, searchBy } = this.state;
+
+        const { isLoading, search, searchBy} = this.state;
+
         // filter
         const filteredEmployees = this.filter();
-
+        // sort
+        let sortedEmployees = this.handleSortvalue(filteredEmployees)
         // loading animation
         const loader = <div className="lds-dual-ring"></div>;
         // check if data presents
-        let content = isLoading ? loader : <List employees={filteredEmployees}/>
+        let content = isLoading ? loader : <List employees={sortedEmployees} sortByFn={this.sortByFn} deleteEmployee={this.deleteEmployee}/>
         // if no data found via search
         if(!isLoading && !filteredEmployees.length){
             content = <div className="not-found">Data Not Found</div>

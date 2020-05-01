@@ -5,14 +5,18 @@
 }
 .cell {
     display: inline-block;
-    width: 18%;
+    width: 12%;
     padding: 10px;
     box-sizing: border-box;
     text-overflow: ellipsis;
     overflow: hidden;
+    cursor: pointer;
 }
 .cell.sm {
     width: 10%;
+}
+.cell.del {
+    text-shadow: 1px 1px 5px gray;
 }
 .row:hover {
     background-color: #d8d8d8!important;

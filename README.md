@@ -62,14 +62,20 @@
     * && operators
 
 # Day 4 - 4/30/2020
+
 * What we practiced?
-    
+    * sort function
+    * difference between id and index
+    * filter and delete employees
 
 * What we learned?
-    
+    array reverse function
+    toggle when sort
 
-
-
+## homework
+ * make null values when we sort descending (to 1.option)
+ * add sorting icons so that flips depending on the sorting: asc, desc
+ * make row heights similar 
 
 
 ## Desired Features
@@ -89,3 +95,5 @@
     * add sort icons (depeneding on ascending or desc)
     * make table responsive
     * footer not on the bottom
+
+
