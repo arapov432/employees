@@ -77,27 +77,15 @@
  * add sorting icons so that flips depending on the sorting: asc, desc
  * make row heights similar 
 
+# Day 5 - 5/01/2020
+* What we practiced?
+* What we learned?
+
 
 ## Desired Features
     * Pagination
-    * Sort
+    * Sort- Done
     * CRUD app
     * Single User Component
     * Add Graph - Login History
     * Add new libraries (sass, bootstrap, react-router)
-
-
-### todo (Ulan)
-    * Pagination 
-    * Scroll Pagination 
-    * Sort
-### homework notes(Ulan)
-    * add sort icons (depeneding on ascending or desc)
-    * make table responsive
-<<<<<<< HEAD
-    * add more styling
-=======
-    * footer not on the bottom
-
-
->>>>>>> regular-pagination
