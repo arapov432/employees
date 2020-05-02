@@ -7,19 +7,22 @@ class List extends Component {
         constructor(props) {
             super(props);
             this.state = {
-                activePage: 1       
+                activePage: 1,
+                limit: 15,       
             }
         }
 
     handlePageChange = (pageNumber) => {
-        console.log(`active page is ${pageNumber}`);
         this.setState({activePage: pageNumber});
     }
 
     render(){
-        const { currentPage } = this.state;
-
+        const { activePage, limit } = this.state;
         const { employees, sortByFn, deleteEmployee } = this.props;
+
+        const start = (activePage - 1)*limit;
+        const end = activePage*limit
+        const pgData = employees.slice(start, end);
 
         return (
             <div className="list">
@@ -34,7 +37,7 @@ class List extends Component {
                 </div>
                 <div className="content">
                     {
-                        employees.map((employee, ind) => {
+                        pgData.map((employee, ind) => {
                             const { id, first_name, last_name, email, city, state } = employee;
                             return (
                             <div key={id} className="row">
@@ -52,9 +55,9 @@ class List extends Component {
                 </div>
                 <Pagination
                     hideFirstLastPages
-                    pageRangeDisplayed={10}
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={10}
+                    pageRangeDisplayed={5}
+                    activePage={activePage}
+                    itemsCountPerPage={limit}
                     totalItemsCount={employees.length}
                     onChange={this.handlePageChange}
                     itemClass="page-item"

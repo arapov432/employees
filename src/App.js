@@ -27,17 +27,17 @@ class App extends Component {
 
     getSearch = e => this.setState({search:e.target.value});
 
-    setSearchBy = e => this.setState({searchBy: e.target.value});
+    getSearchBy = e => this.setState({searchBy: e.target.value});
 
     filter = () => {
         const {employees, search, searchBy} = this.state;
         return employees.filter(employee => {
-            // if(searchBy === '') {
-            //     return  employee["first_name"] && employee["first_name"].toLowerCase().includes(search.toLowerCase())         
-            // } 
-            // else {
+            if(searchBy === '') {
+                return  employee["first_name"] && employee["first_name"].toLowerCase().includes(search.toLowerCase())         
+            } 
+            else {
                 return employee[searchBy] && searchBy.length ? employee[searchBy].toLowerCase().includes(search.toLowerCase()) : true;
-            // }
+            }
         })
     }
     sortByFn = (value) => {

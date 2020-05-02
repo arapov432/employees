@@ -7,7 +7,6 @@
     display: inline-block;
     width: 15%;
     padding: 10px;
-    height: 40px;
     box-sizing: border-box;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -27,9 +26,10 @@
 }
 .row.header {
     font-weight: bolder;
-    background-color: #d8d8d8;
+    background-color: #337ab7;
+    border-color: #337ab7;
     cursor: pointer;
-    color: #000;
+    color: #fff;
 }
 .row {
     border-bottom: solid 1px #d8d8d8;
@@ -37,17 +37,5 @@
     margin: 0!important;
 }
 
-/*  pagination */
 
-.arrow {
-    display: inline-block;
-    padding: 10px;
-    height: 40px;
-    margin: 2px 0;
-    box-sizing: border-box;
-    overflow: hidden;
-    cursor: pointer;
-}
-.arrow.active {
-    background-color: lightblue;
-}
+
