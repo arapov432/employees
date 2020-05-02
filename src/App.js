@@ -32,11 +32,12 @@ class App extends Component {
     filter = () => {
         const {employees, search, searchBy} = this.state;
         return employees.filter(employee => {
-            if(searchBy === '') {
-                return  employee["first_name"] && employee["first_name"].toLowerCase().includes(search.toLowerCase())         
-            } else {
+            // if(searchBy === '') {
+            //     return  employee["first_name"] && employee["first_name"].toLowerCase().includes(search.toLowerCase())         
+            // } 
+            // else {
                 return employee[searchBy] && searchBy.length ? employee[searchBy].toLowerCase().includes(search.toLowerCase()) : true;
-            }
+            // }
         })
     }
     sortByFn = (value) => {

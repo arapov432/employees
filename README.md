@@ -78,9 +78,20 @@
  * make row heights similar 
 
 # Day 5 - 5/01/2020
+
 * What we practiced?
-    
+    * slice method
+    * filter 
 * What we learned?
+    * how pagination works
+    * logic behind pagination
+    * pagination 3rd party libraries
+
+## Homework
+    * try to implement: https://www.npmjs.com/package/react-js-pagination
+    * ### simple-pagination - fix start and end limits
+    * regular pagination - what if we have 1000 pages
+
 
 <!-- Pagination -->
 1. simple paginaton
