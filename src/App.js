@@ -27,7 +27,7 @@ class App extends Component {
 
     getSearch = e => this.setState({search:e.target.value});
 
-    setSearchBy = e => this.setState({searchBy: e.target.value});
+    getSearchBy = e => this.setState({searchBy: e.target.value});
 
     filter = () => {
         const {employees, search, searchBy} = this.state;
