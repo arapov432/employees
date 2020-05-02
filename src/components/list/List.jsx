@@ -37,7 +37,7 @@ class List extends Component {
         // 1. option
         const totalPages = Math.ceil(employees.length / limit);
         const pages = [];
-        for(let i=1; i<= totalPages; i++){
+        for(let i=1; i <= totalPages; i++){
             pages.push(i)
         }
         // 2.option
@@ -81,7 +81,7 @@ class List extends Component {
                     <div onClick={() => this.setPage('prev')} className="prev arrow">Prev</div>
                     {
                         fdata.map((el, ind) => {
-                            const cname = ind+1 == currentPage? "pageNumbers arrow active": "pageNumbers arrow";
+                            const cname = ind+1 === currentPage? "pageNumbers arrow active": "pageNumbers arrow";
                         return <div className={cname} onClick={() => this.setPage(ind+1)} key={ind}>{ind+1}</div>
                         })
                     }
