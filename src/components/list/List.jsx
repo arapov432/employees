@@ -5,8 +5,7 @@ class List extends Component {
             super(props);
             this.state = {
                 currentPage: 1,
-                limit: 15
-                
+                limit: 15         
             }
         }
 
@@ -20,19 +19,34 @@ class List extends Component {
         }
         else if (arrow === 'next' && currentPage < rightLimit) {
             this.setState(prevState => ({currentPage: prevState.currentPage + 1}))
+        } 
+        else if (typeof arrow === 'number') {
+            this.setState({ currentPage: arrow })
         }
 
     }
     render(){
         const { currentPage, limit } = this.state;
 
-        console.log("currentPage", currentPage);
-
         const { employees, sortByFn, deleteEmployee } = this.props;
         // logic
         const start = (currentPage - 1)*limit
         const end = currentPage*limit;
         const paginationData = employees.slice(start, end);
+
+        // 1. option
+        const totalPages = Math.ceil(employees.length / limit);
+        const pages = [];
+        for(let i=1; i<= totalPages; i++){
+            pages.push(i)
+        }
+        // 2.option
+        // map we might use this
+
+        // 3.
+        // modulus
+        const fdata = employees.filter((employee, ind) => !(ind % limit)) // !falsy = true
+        // console.log("fdata", fdata);
 
         return (
             <div className="list">
@@ -65,8 +79,12 @@ class List extends Component {
                 </div>
                 <div className="pagination">
                     <div onClick={() => this.setPage('prev')} className="prev arrow">Prev</div>
-                    <div className="start arrow">{start} - </div>  
-                    <div className="end arrow">{end}</div>
+                    {
+                        fdata.map((el, ind) => {
+                            const cname = ind+1 == currentPage? "pageNumbers arrow active": "pageNumbers arrow";
+                        return <div className={cname} onClick={() => this.setPage(ind+1)} key={ind}>{ind+1}</div>
+                        })
+                    }
                     <div onClick={() => this.setPage('next')} className="next arrow">Next</div>
                 </div>
 
