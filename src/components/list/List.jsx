@@ -25,15 +25,16 @@ class List extends Component {
     }
     render(){
         const { currentPage, limit } = this.state;
-
-        console.log("currentPage", currentPage);
-
+        
         const { employees, sortByFn, deleteEmployee } = this.props;
         // logic
-        const start = (currentPage - 1)*limit
-        const end = currentPage*limit;
+        const start = (currentPage - 1)*limit;
+        let end = currentPage*limit;
         const paginationData = employees.slice(start, end);
-
+        // end > employees.length ? end = employees.length: end = end;
+        if (end > employees.length) {
+            end = employees.length
+        }
         return (
             <div className="list">
                 <div className="row header">
@@ -65,7 +66,8 @@ class List extends Component {
                 </div>
                 <div className="pagination">
                     <div onClick={() => this.setPage('prev')} className="prev arrow">Prev</div>
-                    <div className="start arrow">{start} - </div>  
+                    <div className="start arrow">{start+1}</div>  
+                    <div className="arrow line"> - </div> 
                     <div className="end arrow">{end}</div>
                     <div onClick={() => this.setPage('next')} className="next arrow">Next</div>
                 </div>
