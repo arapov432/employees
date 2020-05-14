@@ -45,17 +45,6 @@ class App extends Component {
     handleSortvalue = (filteredEmployees) => {
         const { toggleOrder, sortBy } = this.state;
         
-        // 1.option (needs a little work)
-        // let sortCB =(a,b) => {
-        //     let res = 0    
-        //     if (a[sortBy] > b[sortBy] ) {
-        //       res = 1
-        //     } else if (a[sortBy] < b[sortBy] || b[sortBy] === null) {
-        //       res = -1
-        //     } 
-        //     return toggleOrder ? res : (res*(-1))
-        //   }
-
         filteredEmployees.sort((a,b) => {
 
             if (a[sortBy] > b[sortBy] ) {
