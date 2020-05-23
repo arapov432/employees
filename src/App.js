@@ -44,7 +44,6 @@ class App extends Component {
     }
     handleSortvalue = (filteredEmployees) => {
         const { toggleOrder, sortBy } = this.state;
-        
         filteredEmployees.sort((a,b) => {
 
             if (a[sortBy] > b[sortBy] ) {
@@ -83,6 +82,7 @@ class App extends Component {
         return (
             <>
                 <div className="container">
+                    <h2>Employee Title</h2>
                     <Search value={search} 
                         getSearch={this.getSearch} 
                         getSearchBy={this.getSearchBy} 

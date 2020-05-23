@@ -64,9 +64,9 @@
 # Day 4 - 4/30/2020
 
 * What we practiced?
-    * sort function
+    * sorting tabular data columns
     * difference between id and index
-    * filter and delete employees
+    * filter and delete employees from tabular data
 
 * What we learned?
     array reverse function
@@ -79,12 +79,16 @@
 
 # Day 5 - 5/01/2020
 * What we practiced?
+    
 * What we learned?
 
+<!-- Pagination -->
+1. simple paginaton
+2. pagination with number
+3. library for pagination
+<!-- 4. scroll pagination -->
 
 ## Desired Features
-    * Pagination
-    * Sort- Done
     * CRUD app
     * Single User Component
     * Add Graph - Login History
